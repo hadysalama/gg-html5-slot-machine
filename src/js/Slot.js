@@ -68,6 +68,16 @@ export default class Slot {
     this.spinButton.disabled = true;
     this.wager.disabled = true;
 
+    if (
+      parseFloat(this.wager.value) < 0.1 ||
+      isNaN(parseFloat(this.wager.value))
+    ) {
+      alert("Wager must be at least 0.1 GG.");
+      this.spinButton.disabled = false;
+      this.wager.disabled = false;
+      throw new Error("Wager must be at least 0.1 GG.");
+    }
+
     this.jackpot = parseFloat(this.jackpot) + parseFloat(this.wager.value);
     document.getElementById("jp").innerHTML = this.jackpot;
 
