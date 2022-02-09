@@ -6,19 +6,19 @@ export default class Slot {
     Symbol.preload();
 
     this.currentSymbols = [
-      ["death_star", "death_star", "death_star"],
-      ["death_star", "death_star", "death_star"],
-      ["death_star", "death_star", "death_star"],
-      ["death_star", "death_star", "death_star"],
-      ["death_star", "death_star", "death_star"],
+      ["small_goggles_purple", "small_goggles_purple", "small_goggles_purple"],
+      ["small_goggles_purple", "small_goggles_purple", "small_goggles_purple"],
+      ["small_goggles_purple", "small_goggles_purple", "small_goggles_purple"],
+      ["small_goggles_purple", "small_goggles_purple", "small_goggles_purple"],
+      ["small_goggles_purple", "small_goggles_purple", "small_goggles_purple"],
     ];
 
     this.nextSymbols = [
-      ["death_star", "death_star", "death_star"],
-      ["death_star", "death_star", "death_star"],
-      ["death_star", "death_star", "death_star"],
-      ["death_star", "death_star", "death_star"],
-      ["death_star", "death_star", "death_star"],
+      ["small_goggles_purple", "small_goggles_purple", "small_goggles_purple"],
+      ["small_goggles_purple", "small_goggles_purple", "small_goggles_purple"],
+      ["small_goggles_purple", "small_goggles_purple", "small_goggles_purple"],
+      ["small_goggles_purple", "small_goggles_purple", "small_goggles_purple"],
+      ["small_goggles_purple", "small_goggles_purple", "small_goggles_purple"],
     ];
 
     this.container = domElement;
@@ -32,6 +32,8 @@ export default class Slot {
     this.spinButton.addEventListener("click", () => this.spin());
 
     this.autoPlayCheckbox = document.getElementById("autoplay");
+
+    this.jackpot = document.getElementById("jp").innerHTML;
 
     if (config.inverted) {
       this.container.classList.add("inverted");
@@ -74,5 +76,8 @@ export default class Slot {
     if (this.autoPlayCheckbox.checked) {
       return window.setTimeout(() => this.spin(), 200);
     }
+
+    this.jackpot = parseFloat(this.jackpot) + 0.1;
+    document.getElementById("jp").innerHTML = this.jackpot;
   }
 }
