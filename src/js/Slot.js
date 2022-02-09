@@ -33,6 +33,8 @@ export default class Slot {
 
     this.autoPlayCheckbox = document.getElementById("autoplay");
 
+    this.wager = document.getElementById("wager");
+
     this.jackpot = document.getElementById("jp").innerHTML;
 
     if (config.inverted) {
@@ -64,20 +66,22 @@ export default class Slot {
 
   onSpinStart(symbols) {
     this.spinButton.disabled = true;
+    this.wager.disabled = true;
+
+    this.jackpot = parseFloat(this.jackpot) + parseFloat(this.wager.value);
+    document.getElementById("jp").innerHTML = this.jackpot;
 
     this.config.onSpinStart?.(symbols);
   }
 
   onSpinEnd(symbols) {
     this.spinButton.disabled = false;
+    this.wager.disabled = false;
 
     this.config.onSpinEnd?.(symbols);
 
     if (this.autoPlayCheckbox.checked) {
       return window.setTimeout(() => this.spin(), 200);
     }
-
-    this.jackpot = parseFloat(this.jackpot) + 0.1;
-    document.getElementById("jp").innerHTML = this.jackpot;
   }
 }

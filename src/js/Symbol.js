@@ -1,4 +1,6 @@
 const cache = {};
+const fortuna = require("javascript-fortuna");
+fortuna.init();
 
 export default class Symbol {
   constructor(name = Symbol.random()) {
@@ -31,6 +33,6 @@ export default class Symbol {
   }
 
   static random() {
-    return this.symbols[Math.floor(Math.random() * this.symbols.length)];
+    return this.symbols[Math.floor(fortuna.random() * this.symbols.length)];
   }
 }
